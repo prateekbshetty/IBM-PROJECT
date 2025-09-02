@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About BMW Experience</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #2e2e2e, #4a4a4a); /* Brushed grey */
+            color: #f5f5f5;
+        }
+
+        header {
+            background: #3a3a3a;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid #c49e6c;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #c49e6c;
+            letter-spacing: 1.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 25px;
+        }
+
+        nav a {
+            color: #c49e6c;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            background: #3a3a3a;
+            color: #c49e6c;
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid #c49e6c;
+            font-size: 0.9em;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BMW Experience</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="registration.html">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>About Us</h2>
+        <p>BMW Experience is more than a brand—it’s a lifestyle. We are dedicated to delivering the thrill of driving through precision engineering, timeless design, and cutting-edge innovation.</p>
+        <p>Our platform offers exclusive access to BMW’s latest models, personalized test drives, and premium ownership services. Whether you're a long-time enthusiast or a first-time explorer, we invite you to discover the elegance and performance that define BMW.</p>
+    </section>
+    
+        
+        <script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "ec1d24b3-5552-402b-b987-af71414b3f82", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "93790ded-a71f-4b96-823c-5230dd083823", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
+    
+
+    <footer>
+        &copy; 2025 BMW Experience. Crafted for those who drive distinction.
+    </footer>
+</body>
+</html>
