@@ -1,177 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BMW Experience</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root {
-      --gold-color: #c59d5f;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .nav-link {
-      position: relative;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: var(--gold-color);
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Narration - Hotel Udupi Grand</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- Core Site & Navigation Styles --- */
+        :root {
+            --gold-color: #c59d5f;
+            --dark-blue: #0a192f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--gold-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* --- Text-to-Speech Page Specific Styles --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        #tts-body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 150px); /* Adjust for header/footer */
+            overflow: hidden;
+            position: relative;
+        }
+
+        #tts-body .container {
+            background: #ffffff;
+            color: #333;
+            padding: 40px 50px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            opacity: 0;
+            animation: tts-fadeIn 1s forwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        #tts-body h1 {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            color: #4a4a4a;
+            letter-spacing: 2px;
+            user-select: none;
+        }
+
+        #tts-body textarea {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.1em;
+            border-radius: 15px;
+            border: 2px solid #ddd;
+            resize: none;
+            background-color: #f9f9f9;
+            color: #333;
+            box-shadow: inset 2px 2px 5px #ccc;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-height: 140px;
+        }
+
+        #tts-body textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px #667eea;
+            background-color: #fff;
+        }
+
+        button#speakBtn {
+            margin-top: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button#speakBtn:disabled {
+            background: #bbb;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        button#speakBtn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.9);
+        }
+
+        button#speakBtn .spinner {
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes tts-fadeIn { to { opacity: 1;} }
+
+        #tts-body .background-circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #tts-body .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: pulse 6s ease-in-out infinite;
+            filter: blur(40px);
+            mix-blend-mode: screen;
+        }
+
+        #tts-body .circle1 { width: 400px; height: 400px; background: #667eea; top: 10%; left: 10%; animation-delay: 0s; }
+        #tts-body .circle2 { width: 350px; height: 350px; background: #764ba2; bottom: 10%; right: 10%; animation-delay: 2s; }
+        #tts-body .circle3 { width: 250px; height: 250px; background: #a044ff; top: 50%; left: 60%; animation-delay: 4s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.15); opacity: 0.35; }
+        }
+
+        @keyframes soundWave {
+            0%, 100% { transform: scaleY(1); opacity: 0.7; }
+            50% { transform: scaleY(1.5); opacity: 1; }
+        }
+
+        #tts-body .sound-wave {
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: white;
+            margin-left: 3px;
+            border-radius: 2px;
+            animation: soundWave 1s infinite ease-in-out;
+        }
+
+        #tts-body .sound-wave:nth-child(2) { animation-delay: 0.2s; }
+        #tts-body .sound-wave:nth-child(3) { animation-delay: 0.4s; }
+    </style>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen">
+<body>
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-md">
+        </header>
 
-  <!-- Header -->
-  <header class="bg-gray-900 text-white sticky top-0 z-50 shadow-md">
-    <div class="container mx-auto flex justify-between items-center py-4 px-6">
-      <a href="#home" class="text-2xl font-bold">BMW <span class="text-yellow-500">Experience</span></a>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#login" class="nav-link">Login</a>
-        <a href="#sentiment" class="nav-link">Sentiment Analysis</a>
-        <a href="#tts" class="nav-link">Text-to-Speech</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Home/About Section -->
-  <section id="home" class="bg-gradient-to-r from-gray-800 to-gray-600 text-gray-100 text-center py-16 px-6 flex-grow">
-    <h1 class="text-4xl font-bold text-yellow-500 mb-6">Welcome to BMW Experience</h1>
-    <p class="text-lg leading-relaxed mb-4">
-      BMW Experience is more than a brand—it’s a lifestyle. We are dedicated to delivering the thrill of driving through precision engineering, timeless design, and cutting-edge innovation.
-    </p>
-    <p class="text-lg leading-relaxed">
-      Our platform offers exclusive access to BMW’s latest models, personalized test drives, and premium ownership services. Discover the elegance and performance that define BMW.
-    </p>
-  </section>
-
-  <!-- Login Section -->
-  <section id="login" class="bg-white text-gray-800 py-16 px-6 flex-grow">
-    <div class="max-w-md mx-auto bg-gray-100 p-8 rounded-2xl shadow-lg">
-      <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">🔐 Login</h2>
-      <form onsubmit="return loginUser(event)">
-        <div class="mb-4">
-          <label class="block text-left font-semibold mb-2">Username</label>
-          <input type="text" id="username" required 
-            class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+    <main id="tts-body">
+         <div class="background-circles" aria-hidden="true">
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+            <div class="circle circle3"></div>
         </div>
-        <div class="mb-6">
-          <label class="block text-left font-semibold mb-2">Password</label>
-          <input type="password" id="password" required 
-            class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+
+        <div class="container" role="main" aria-labelledby="title">
+            <h1 id="title">🎙️ Text to Speech</h1>
+            <textarea
+                id="textInput"
+                placeholder="Type something inspiring..."
+                rows="5"
+                aria-label="Text input for speech synthesis"
+                spellcheck="false"
+            ></textarea>
+            <br />
+            <button id="speakBtn" aria-live="polite" aria-busy="false">
+                🔊 Speak
+                <span class="sound-wave" aria-hidden="true"></span>
+                <span class="sound-wave" aria-hidden="true"></span>
+                <span class="sound-wave" aria-hidden="true"></span>
+            </button>
         </div>
-        <button type="submit" 
-          class="w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 font-bold text-lg">
-          Login
-        </button>
-      </form>
-      <p id="loginMessage" class="mt-4 text-center font-semibold"></p>
-    </div>
-  </section>
+    </main>
 
-  <!-- Sentiment Analysis Section -->
-  <section id="sentiment" class="bg-white text-gray-800 py-16 px-6 text-center">
-    <h2 class="text-3xl font-bold mb-6">Advanced Sentiment Analysis</h2>
-    <p class="max-w-2xl mx-auto mb-8">
-      This feature allows us to analyze customer feedback in real time using AI. By processing text reviews, 
-      we classify emotions as positive, negative, or neutral, helping businesses improve their services.
-    </p>
-    <textarea id="sentimentInput" rows="4" placeholder="Type feedback here..."
-      class="w-full max-w-xl mx-auto block border p-4 rounded-lg shadow"></textarea>
-    <button onclick="analyzeSentiment()" 
-      class="mt-4 bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
-      Analyze Sentiment
-    </button>
-    <p id="sentimentResult" class="mt-4 font-semibold text-lg"></p>
-  </section>
+    <footer id="footer" class="bg-gray-800 text-white py-12">
+        </footer>
 
-  <!-- Text-to-Speech Section -->
-  <section id="tts" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-16 px-6 text-center relative">
-    <h2 class="text-3xl font-bold mb-6">🎙️ Text-to-Speech</h2>
-    <textarea id="textInput" rows="5" placeholder="Type something inspiring..."
-      class="w-full max-w-xl mx-auto block p-4 rounded-lg text-gray-900"></textarea>
-    <button id="speakBtn" class="mt-6 bg-yellow-500 px-8 py-3 rounded-full font-bold text-lg hover:bg-yellow-600">
-      🔊 Speak
-    </button>
-  </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- TEMPLATE INJECTION (Navigation and Footer) ---
+            const headerHTML = `
+                <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                    <a href="index.html" class="text-2xl md:text-3xl font-playfair font-bold text-gray-800">Hotel <span style="color: var(--gold-color);">Udupi Grand</span></a>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="text-gray-600 hover:text-gray-900 nav-link">Home</a>
+                        <a href="about.html" class="text-gray-600 hover:text-gray-900 nav-link">About</a>
+                        <a href="sentiment.html" class="text-gray-600 hover:text-gray-900 nav-link">Sentiment Analysis</a>
+                        <a href="text_to_speech.html" class="text-gray-600 hover:text-gray-900 nav-link active">T-t-S</a>
+                        <div id="auth-links" class="flex items-center space-x-4"></div>
+                    </nav>
+                    <button id="mobile-menu-button" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+                <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+                    <a href="index.html" class="block text-gray-600 hover:text-gray-900">Home</a>
+                    <a href="about.html" class="block text-gray-600 hover:text-gray-900">About</a>
+                    <a href="sentiment.html" class="block text-gray-600 hover:text-gray-900">Sentiment Analysis</a>
+                    <a href="text_to_speech.html" class="block text-gray-600 hover:text-gray-900">T-t-S</a>
+                    <div id="mobile-auth-links" class="mt-4"></div>
+                </div>
+            `;
+            const footerHTML = `
+                <div class="container mx-auto px-6 text-center">
+                     <a href="index.html" class="text-2xl font-playfair font-bold">Hotel <span style="color: var(--gold-color);">Udupi Grand</span></a>
+                     <p class="mt-4 mb-6 max-w-md mx-auto">AI-enhanced luxury in the heart of the beautiful city of Udupi.</p>
+                     <p class="mt-8 text-sm text-gray-500">© 2025 Hotel Udupi Grand. All Rights Reserved.</p>
+                </div>
+            `;
+            document.getElementById('header').innerHTML = headerHTML;
+            document.getElementById('footer').innerHTML = footerHTML;
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-yellow-500 text-center py-6">
-    © 2025 BMW Experience. All Rights Reserved.
-  </footer>
+            // --- LOGIN/LOGOUT & MENU LOGIC ---
+            const authLinks = document.getElementById('auth-links');
+            const mobileAuthLinks = document.getElementById('mobile-auth-links');
+            const loggedInUser = localStorage.getItem('loggedInUser');
 
-  <!-- Scripts -->
-  <script>
-    // Simple Sentiment Analysis (demo logic)
-    function analyzeSentiment() {
-      const text = document.getElementById("sentimentInput").value.toLowerCase();
-      let result = "Neutral 🙂";
-      if (text.includes("good") || text.includes("excellent") || text.includes("love")) {
-        result = "Positive 😃";
-      } else if (text.includes("bad") || text.includes("poor") || text.includes("hate")) {
-        result = "Negative 😞";
-      }
-      document.getElementById("sentimentResult").innerText = "Sentiment: " + result;
-    }
+            if (loggedInUser) {
+                authLinks.innerHTML = `<span class="font-semibold text-sm">Welcome, ${loggedInUser}</span><button id="logout-btn" class="px-5 py-2 rounded-full bg-red-500 text-white hover:bg-red-600 text-sm font-semibold">Logout</button>`;
+                mobileAuthLinks.innerHTML = `<span class="block text-center font-semibold mb-2">Welcome, ${loggedInUser}</span><button id="mobile-logout-btn" class="w-full text-center px-6 py-2 rounded-full bg-red-500 text-white hover:bg-red-600 font-semibold">Logout</button>`;
+            } else {
+                authLinks.innerHTML = `<a href="login.html" class="px-5 py-2 rounded-full border border-gray-300 hover:bg-gray-100 font-semibold text-sm">Login</a>`;
+                mobileAuthLinks.innerHTML = `<a href="login.html" class="block mt-4 w-full text-center px-6 py-2 rounded-full border border-gray-300 hover:bg-gray-100 font-semibold">Login</a>`;
+            }
+            const logout = () => { localStorage.removeItem('loggedInUser'); window.location.href = 'login.html'; };
+            document.getElementById('logout-btn')?.addEventListener('click', logout);
+            document.getElementById('mobile-logout-btn')?.addEventListener('click', logout);
+            document.getElementById('mobile-menu-button').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
 
-    // Text-to-Speech
-    const speakBtn = document.getElementById("speakBtn");
-    const textInput = document.getElementById("textInput");
-    const synth = window.speechSynthesis;
+            // --- WATSON TEXT TO SPEECH SCRIPT ---
+            const textInput = document.getElementById("textInput");
+            const speakBtn = document.getElementById("speakBtn");
+            const synth = window.speechSynthesis;
 
-    speakBtn.addEventListener("click", () => {
-      const text = textInput.value.trim();
-      if (!text) { alert("Please enter some text."); return; }
-      if (synth.speaking) synth.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      synth.speak(utterance);
-    });
+            function speak() {
+                const text = textInput.value.trim();
+                if (!text) {
+                    alert("Please enter some text.");
+                    return;
+                }
 
-    // Login (demo authentication)
-    function loginUser(event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const msg = document.getElementById("loginMessage");
+                if (synth.speaking) {
+                    synth.cancel();
+                }
 
-      if (username === "admin" && password === "1234") {
-        msg.innerText = "✅ Login successful! Welcome, " + username + ".";
-        msg.className = "mt-4 text-green-600 font-semibold text-center";
-      } else {
-        msg.innerText = "❌ Invalid username or password!";
-        msg.className = "mt-4 text-red-600 font-semibold text-center";
-      }
-    }
-  </script>
+                speakBtn.disabled = true;
+                speakBtn.setAttribute("aria-busy", "true");
+                speakBtn.innerHTML = `
+                    🔊 Synthesizing...
+                    <div class="spinner" aria-hidden="true"></div>
+                `;
 
-  <!-- Watson Assistant -->
-  <script>
-    window.watsonAssistantChatOptions = {
-      integrationID: "ec1d24b3-5552-402b-b987-af71414b3f82",
-      region: "au-syd",
-      serviceInstanceID: "93790ded-a71f-4b96-823c-5230dd083823",
-      onLoad: async (instance) => { await instance.render(); }
-    };
-    setTimeout(function(){
-      const t=document.createElement('script');
-      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
-      (window.watsonAssistantChatOptions.clientVersion || 'latest') +
-      "/WatsonAssistantChatEntry.js";
-      document.head.appendChild(t);
-    });
-  </script>
+                setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.onstart = () => {
+                        speakBtn.innerHTML = `
+                            🔊 Speaking...
+                            <span class="sound-wave"></span><span class="sound-wave"></span><span class="sound-wave"></span>
+                        `;
+                    };
+                    utterance.onend = () => {
+                        resetButton();
+                    };
+                    utterance.onerror = (event) => {
+                        console.error("SpeechSynthesisUtterance.onerror", event);
+                        alert("An error occurred with the browser's speech engine.");
+                        resetButton();
+                    };
+                    synth.speak(utterance);
+                }, 1000);
+            }
+
+            function resetButton() {
+                speakBtn.disabled = false;
+                speakBtn.setAttribute("aria-busy", "false");
+                speakBtn.innerHTML = `
+                    🔊 Speak
+                    <span class="sound-wave"></span>
+                    <span class="sound-wave"></span>
+                    <span class="sound-wave"></span>
+                `;
+            }
+
+            speakBtn.addEventListener("click", speak);
+
+            textInput.addEventListener("keydown", (e) => {
+                if (e.ctrlKey && e.key === "Enter") {
+                    e.preventDefault();
+                    speak();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
