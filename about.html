@@ -40,6 +40,7 @@
       <a href="#home" class="text-2xl font-bold">BMW <span class="text-yellow-500">Experience</span></a>
       <nav class="hidden md:flex space-x-6">
         <a href="#home" class="nav-link">Home</a>
+        <a href="#login" class="nav-link">Login</a>
         <a href="#sentiment" class="nav-link">Sentiment Analysis</a>
         <a href="#tts" class="nav-link">Text-to-Speech</a>
       </nav>
@@ -55,6 +56,30 @@
     <p class="text-lg leading-relaxed">
       Our platform offers exclusive access to BMW’s latest models, personalized test drives, and premium ownership services. Discover the elegance and performance that define BMW.
     </p>
+  </section>
+
+  <!-- Login Section -->
+  <section id="login" class="bg-white text-gray-800 py-16 px-6 flex-grow">
+    <div class="max-w-md mx-auto bg-gray-100 p-8 rounded-2xl shadow-lg">
+      <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">🔐 Login</h2>
+      <form onsubmit="return loginUser(event)">
+        <div class="mb-4">
+          <label class="block text-left font-semibold mb-2">Username</label>
+          <input type="text" id="username" required 
+            class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        </div>
+        <div class="mb-6">
+          <label class="block text-left font-semibold mb-2">Password</label>
+          <input type="password" id="password" required 
+            class="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        </div>
+        <button type="submit" 
+          class="w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 font-bold text-lg">
+          Login
+        </button>
+      </form>
+      <p id="loginMessage" class="mt-4 text-center font-semibold"></p>
+    </div>
   </section>
 
   <!-- Sentiment Analysis Section -->
@@ -114,6 +139,22 @@
       const utterance = new SpeechSynthesisUtterance(text);
       synth.speak(utterance);
     });
+
+    // Login (demo authentication)
+    function loginUser(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("loginMessage");
+
+      if (username === "admin" && password === "1234") {
+        msg.innerText = "✅ Login successful! Welcome, " + username + ".";
+        msg.className = "mt-4 text-green-600 font-semibold text-center";
+      } else {
+        msg.innerText = "❌ Invalid username or password!";
+        msg.className = "mt-4 text-red-600 font-semibold text-center";
+      }
+    }
   </script>
 
   <!-- Watson Assistant -->
