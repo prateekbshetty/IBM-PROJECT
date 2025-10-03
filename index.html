@@ -40,7 +40,7 @@
     h1, h2 {
       color: var(--gold);
     }
-    textarea {
+    input[type="text"] {
       width: 100%;
       max-width: 600px;
       padding: 15px;
@@ -48,10 +48,9 @@
       border: none;
       background-color: var(--dark);
       color: var(--light);
-      resize: none;
       margin-bottom: 20px;
     }
-    button, a.button {
+    button {
       background-color: var(--gold);
       color: var(--black);
       padding: 12px 24px;
@@ -59,12 +58,16 @@
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
       margin-top: 10px;
     }
-    button:hover, a.button:hover {
+    button:hover {
       background-color: #d8b47f;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -73,9 +76,9 @@
   <header>
     <h1>BMW Experience</h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#sentiment">Sentiment Analysis</a>
-      <a href="#tts">Text-to-Speech</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="registration.html">Register</a>
     </nav>
   </header>
 
@@ -85,20 +88,16 @@
     <p>Explore exclusive access to BMW’s latest models, personalized test drives, and premium ownership services.</p>
   </section>
 
-  <section id="sentiment">
-    <h2>Advanced Sentiment Analysis</h2>
-    <p>Analyze customer feedback in real time using AI. Classify emotions as positive, negative, or neutral to improve services.</p>
-    <textarea id="sentimentInput" placeholder="Type feedback here..."></textarea>
-    <button onclick="analyzeSentiment()">Analyze Sentiment</button>
-    <p id="sentimentResult"></p>
-    <a href="#home" class="button">⬅️ Back to Home</a>
+  <section id="bmw-image">
+    <h2>Explore the BMW Lineup</h2>
+    <img src="https://images.pexels.com/photos/19094355/pexels-photo-19094355.jpeg" alt="BMW Car">
   </section>
 
-  <section id="tts">
-    <h2>🎙️ Text-to-Speech</h2>
-    <textarea id="textInput" placeholder="Type something inspiring..."></textarea>
-    <button id="speakBtn">🔊 Speak</button>
-    <a href="#home" class="button">⬅️ Back to Home</a>
+  <section id="search">
+    <h2>Find Your BMW</h2>
+    <input type="text" id="carSearch" placeholder="Search BMW models...">
+    <button onclick="searchBMW()">Search</button>
+    <p id="searchResult"></p>
   </section>
 
   <footer>
@@ -106,27 +105,14 @@
   </footer>
 
   <script>
-    function analyzeSentiment() {
-      const text = document.getElementById("sentimentInput").value.toLowerCase();
-      const positiveWords = /\b(good|excellent|love)\b/;
-      const negativeWords = /\b(bad|poor|hate)\b/;
-      let result = "Neutral 🙂";
-      if (positiveWords.test(text)) result = "Positive 😃";
-      else if (negativeWords.test(text)) result = "Negative 😞";
-      document.getElementById("sentimentResult").innerText = "Sentiment: " + result;
+    function searchBMW() {
+      const query = document.getElementById("carSearch").value.toLowerCase();
+      const models = ["3 series", "5 series", "x5", "i8", "m3", "x7", "z4"];
+      const match = models.find(model => query.includes(model));
+      document.getElementById("searchResult").innerText = match 
+        ? `🔍 You searched for: BMW ${match.toUpperCase()}` 
+        : "❌ Model not found. Try another BMW.";
     }
-
-    const speakBtn = document.getElementById("speakBtn");
-    const textInput = document.getElementById("textInput");
-    const synth = window.speechSynthesis;
-
-    speakBtn.addEventListener("click", () => {
-      const text = textInput.value.trim();
-      if (!text) return alert("Please enter some text.");
-      if (synth.speaking) synth.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      synth.speak(utterance);
-    });
   </script>
 </body>
 </html>
