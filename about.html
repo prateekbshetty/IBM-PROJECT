@@ -3,127 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BMW Experience</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>About BMW Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold-color: #c59d5f;
+      --gold: #c49e6c;
+      --black: #1a1a1a;
+      --dark: #2e2e2e;
+      --light: #f5f5f5;
     }
     body {
-      font-family: 'Inter', sans-serif;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--black);
+      color: var(--light);
     }
-    .nav-link {
-      position: relative;
+    header, footer {
+      background-color: var(--dark);
+      color: var(--gold);
+      text-align: center;
+      padding: 20px;
     }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: var(--gold-color);
-      transition: width 0.3s ease;
+    nav a {
+      color: var(--gold);
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
     }
-    .nav-link:hover::after,
-    .nav-link.active::after {
+    nav a:hover {
+      color: var(--light);
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    h1, h2 {
+      color: var(--gold);
+    }
+    textarea, input[type="text"] {
       width: 100%;
+      max-width: 600px;
+      padding: 15px;
+      border-radius: 8px;
+      border: none;
+      background-color: var(--dark);
+      color: var(--light);
+      resize: none;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: var(--gold);
+      color: var(--black);
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #d8b47f;
     }
   </style>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen">
+<body>
 
-  <!-- Header -->
-  <header class="bg-gray-900 text-white sticky top-0 z-50 shadow-md">
-    <div class="container mx-auto flex justify-between items-center py-4 px-6">
-      <a href="#home" class="text-2xl font-bold">BMW <span class="text-yellow-500">Experience</span></a>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#sentiment" class="nav-link">Sentiment Analysis</a>
-        <a href="#tts" class="nav-link">Text-to-Speech</a>
-      </nav>
-    </div>
+  <header>
+    <h1>About BMW Experience</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="registration.html">Register</a>
+    </nav>
   </header>
 
-  <!-- Home/About Section -->
-  <section id="home" class="bg-gradient-to-r from-gray-800 to-gray-600 text-gray-100 text-center py-16 px-6 flex-grow">
-    <h1 class="text-4xl font-bold text-yellow-500 mb-6">Welcome to BMW Experience</h1>
-    <p class="text-lg leading-relaxed mb-4">
-      BMW Experience is more than a brand—it’s a lifestyle. We are dedicated to delivering the thrill of driving through precision engineering, timeless design, and cutting-edge innovation.
-    </p>
-    <p class="text-lg leading-relaxed">
-      Our platform offers exclusive access to BMW’s latest models, personalized test drives, and premium ownership services. Discover the elegance and performance that define BMW.
-    </p>
+  <section>
+    <h2>Our Vision</h2>
+    <p>BMW Experience is a fusion of luxury, technology, and emotion. We believe in delivering not just vehicles, but unforgettable journeys powered by innovation and AI.</p>
   </section>
 
-  <!-- Sentiment Analysis Section -->
-  <section id="sentiment" class="bg-white text-gray-800 py-16 px-6 text-center">
-    <h2 class="text-3xl font-bold mb-6">Advanced Sentiment Analysis</h2>
-    <p class="max-w-2xl mx-auto mb-8">
-      This feature allows us to analyze customer feedback in real time using AI. By processing text reviews, 
-      we classify emotions as positive, negative, or neutral, helping businesses improve their services.
-    </p>
-    <textarea id="sentimentInput" rows="4" placeholder="Type feedback here..."
-      class="w-full max-w-xl mx-auto block border p-4 rounded-lg shadow"></textarea>
-    <button onclick="analyzeSentiment()" 
-      class="mt-4 bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
-      Analyze Sentiment
-    </button>
-    <p id="sentimentResult" class="mt-4 font-semibold text-lg"></p>
-
-    <!-- Back to Home Button -->
-    <a href="#home" 
-       class="mt-8 inline-block bg-gray-900 text-yellow-500 px-6 py-2 rounded-lg hover:bg-gray-800">
-       ⬅️ Back to Home
-    </a>
+  <section id="sentiment">
+    <h2>🧠 Sentiment Analysis</h2>
+    <p>Analyze customer feedback in real time using AI. Classify emotions as positive, negative, or neutral to improve services.</p>
+    <textarea id="sentimentInput" placeholder="Type feedback here..."></textarea>
+    <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+    <p id="sentimentResult"></p>
   </section>
 
-  <!-- Text-to-Speech Section -->
-  <section id="tts" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-16 px-6 text-center relative">
-    <h2 class="text-3xl font-bold mb-6">🎙️ Text-to-Speech</h2>
-    <textarea id="textInput" rows="5" placeholder="Type something inspiring..."
-      class="w-full max-w-xl mx-auto block p-4 rounded-lg text-gray-900"></textarea>
-    <button id="speakBtn" class="mt-6 bg-yellow-500 px-8 py-3 rounded-full font-bold text-lg hover:bg-yellow-600">
-      🔊 Speak
-    </button>
-
-    <!-- Back to Home Button -->
-    <div class="mt-8">
-      <a href="#home" 
-         class="inline-block bg-gray-900 text-yellow-500 px-6 py-2 rounded-lg hover:bg-gray-800">
-         ⬅️ Back to Home
-      </a>
-    </div>
+  <section id="tts">
+    <h2>🎙️ Text-to-Speech</h2>
+    <textarea id="textInput" placeholder="Type something inspiring..."></textarea>
+    <button id="speakBtn">🔊 Speak</button>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-yellow-500 text-center py-6">
-    © 2025 BMW Experience. All Rights Reserved.
+  <footer>
+    © 2025 BMW Experience. Driven by intelligence, powered by passion.
   </footer>
 
   <!-- Scripts -->
   <script>
-    // Simple Sentiment Analysis (demo logic)
     function analyzeSentiment() {
       const text = document.getElementById("sentimentInput").value.toLowerCase();
+      const positiveWords = /\b(good|excellent|love)\b/;
+      const negativeWords = /\b(bad|poor|hate)\b/;
       let result = "Neutral 🙂";
-      if (text.includes("good") || text.includes("excellent") || text.includes("love")) {
-        result = "Positive 😃";
-      } else if (text.includes("bad") || text.includes("poor") || text.includes("hate")) {
-        result = "Negative 😞";
-      }
+      if (positiveWords.test(text)) result = "Positive 😃";
+      else if (negativeWords.test(text)) result = "Negative 😞";
       document.getElementById("sentimentResult").innerText = "Sentiment: " + result;
     }
 
-    // Text-to-Speech
     const speakBtn = document.getElementById("speakBtn");
     const textInput = document.getElementById("textInput");
     const synth = window.speechSynthesis;
 
     speakBtn.addEventListener("click", () => {
       const text = textInput.value.trim();
-      if (!text) { alert("Please enter some text."); return; }
+      if (!text) return alert("Please enter some text.");
       if (synth.speaking) synth.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       synth.speak(utterance);
