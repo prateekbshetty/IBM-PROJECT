@@ -1,131 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMW Experience</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #2e2e2e, #4a4a4a);
-            color: #f5f5f5;
-        }
-
-        header {
-            background: #3a3a3a;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 2px solid #c49e6c;
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin: 0;
-            color: #c49e6c;
-            letter-spacing: 1.5px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin: 0 25px;
-        }
-
-        nav a {
-            color: #c49e6c;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #ffffff;
-        }
-
-        section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        section p {
-            font-size: 1.3em;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .image-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 40px;
-            padding: 20px;
-        }
-
-        .image-row img {
-            width: 350px;
-            height: auto;
-            margin: 0 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
-        }
-
-        .image-row img:hover {
-            transform: scale(1.03);
-        }
-
-        footer {
-            background: #3a3a3a;
-            color: #c49e6c;
-            text-align: center;
-            padding: 30px;
-            border-top: 2px solid #c49e6c;
-            font-size: 0.9em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMW Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c49e6c;
+      --black: #1a1a1a;
+      --dark: #2e2e2e;
+      --light: #f5f5f5;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--black);
+      color: var(--light);
+    }
+    header, footer {
+      background-color: var(--dark);
+      color: var(--gold);
+      text-align: center;
+      padding: 20px;
+    }
+    nav a {
+      color: var(--gold);
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: var(--light);
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    h1, h2 {
+      color: var(--gold);
+    }
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      padding: 15px;
+      border-radius: 8px;
+      border: none;
+      background-color: var(--dark);
+      color: var(--light);
+      resize: none;
+      margin-bottom: 20px;
+    }
+    button, a.button {
+      background-color: var(--gold);
+      color: var(--black);
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    button:hover, a.button:hover {
+      background-color: #d8b47f;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>BMW Experience</h1>
-        <nav>
-            <ul>
-                <li><a href="about.html">About</a></li>
-                <li><a href="registration.html">Register</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section>
-        <h2>Luxury in Motion</h2>
-        <p>Welcome to the BMW Experience — where precision engineering meets timeless elegance. Explore the latest models, indulge in personalized services, and feel the thrill of driving excellence.</p>
+  <header>
+    <h1>BMW Experience</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#sentiment">Sentiment Analysis</a>
+      <a href="#tts">Text-to-Speech</a>
+    </nav>
+  </header>
 
-        <div class="image-row">
-            <img src="https://media.istockphoto.com/id/1435226078/photo/front-of-a-white-bmw-m4-parked-on-a-street-with-trees-in-the-background.jpg?s=612x612&w=0&k=20&c=l1IupUrh-_Zbcse-hDkaUAh-qMD82hJspXjnN0IBZlg=" alt="BMW sports car on road">
-            
-            <img src="https://media.istockphoto.com/id/1419936488/photo/bmw-m4.jpg?s=612x612&w=0&k=20&c=XQIDc0gZHeaxKDrs5SYJ6ymbWDAHUlSduaO0pJ0yGiA=" alt="BMW parked in urban setting">
-        </div>
-    </section>
+  <section id="home">
+    <h2>Welcome to BMW Experience</h2>
+    <p>BMW Experience is more than a brand—it’s a lifestyle. Discover the thrill of driving through precision engineering and timeless design.</p>
+    <p>Explore exclusive access to BMW’s latest models, personalized test drives, and premium ownership services.</p>
+  </section>
 
-    <footer>
-        &copy; 2025 BMW Experience. Crafted for those who drive distinction.
-    </footer>
+  <section id="sentiment">
+    <h2>Advanced Sentiment Analysis</h2>
+    <p>Analyze customer feedback in real time using AI. Classify emotions as positive, negative, or neutral to improve services.</p>
+    <textarea id="sentimentInput" placeholder="Type feedback here..."></textarea>
+    <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+    <p id="sentimentResult"></p>
+    <a href="#home" class="button">⬅️ Back to Home</a>
+  </section>
+
+  <section id="tts">
+    <h2>🎙️ Text-to-Speech</h2>
+    <textarea id="textInput" placeholder="Type something inspiring..."></textarea>
+    <button id="speakBtn">🔊 Speak</button>
+    <a href="#home" class="button">⬅️ Back to Home</a>
+  </section>
+
+  <footer>
+    © 2025 BMW Experience. All Rights Reserved.
+  </footer>
+
+  <script>
+    function analyzeSentiment() {
+      const text = document.getElementById("sentimentInput").value.toLowerCase();
+      const positiveWords = /\b(good|excellent|love)\b/;
+      const negativeWords = /\b(bad|poor|hate)\b/;
+      let result = "Neutral 🙂";
+      if (positiveWords.test(text)) result = "Positive 😃";
+      else if (negativeWords.test(text)) result = "Negative 😞";
+      document.getElementById("sentimentResult").innerText = "Sentiment: " + result;
+    }
+
+    const speakBtn = document.getElementById("speakBtn");
+    const textInput = document.getElementById("textInput");
+    const synth = window.speechSynthesis;
+
+    speakBtn.addEventListener("click", () => {
+      const text = textInput.value.trim();
+      if (!text) return alert("Please enter some text.");
+      if (synth.speaking) synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    });
+  </script>
 </body>
 </html>
