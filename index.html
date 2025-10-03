@@ -33,6 +33,53 @@
     nav a:hover {
       color: var(--light);
     }
+    #hero {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+    }
+    #hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+    #hero .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+    #hero h2 {
+      color: var(--gold);
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    #hero input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      background-color: var(--dark);
+      color: var(--light);
+      font-size: 1em;
+    }
+    #hero button {
+      margin-top: 10px;
+      padding: 12px 24px;
+      background-color: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #hero button:hover {
+      background-color: #d8b47f;
+    }
     section {
       padding: 60px 20px;
       text-align: center;
@@ -40,34 +87,9 @@
     h1, h2 {
       color: var(--gold);
     }
-    input[type="text"] {
-      width: 100%;
-      max-width: 600px;
-      padding: 15px;
-      border-radius: 8px;
-      border: none;
-      background-color: var(--dark);
+    #searchResult {
+      margin-top: 15px;
       color: var(--light);
-      margin-bottom: 20px;
-    }
-    button {
-      background-color: var(--gold);
-      color: var(--black);
-      padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #d8b47f;
-    }
-    img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -82,22 +104,20 @@
     </nav>
   </header>
 
-  <section id="home">
+  <section id="hero">
+    <img src="https://images.pexels.com/photos/19094355/pexels-photo-19094355.jpeg" alt="BMW Hero">
+    <div class="overlay">
+      <h2>Find Your Ultimate BMW</h2>
+      <input type="text" id="carSearch" placeholder="Search BMW models...">
+      <button onclick="searchBMW()">Search</button>
+      <p id="searchResult"></p>
+    </div>
+  </section>
+
+  <section id="intro">
     <h2>Welcome to BMW Experience</h2>
     <p>BMW Experience is more than a brand—it’s a lifestyle. Discover the thrill of driving through precision engineering and timeless design.</p>
     <p>Explore exclusive access to BMW’s latest models, personalized test drives, and premium ownership services.</p>
-  </section>
-
-  <section id="bmw-image">
-    <h2>Explore the BMW Lineup</h2>
-    <img src="https://images.pexels.com/photos/19094355/pexels-photo-19094355.jpeg" alt="BMW Car">
-  </section>
-
-  <section id="search">
-    <h2>Find Your BMW</h2>
-    <input type="text" id="carSearch" placeholder="Search BMW models...">
-    <button onclick="searchBMW()">Search</button>
-    <p id="searchResult"></p>
   </section>
 
   <footer>
