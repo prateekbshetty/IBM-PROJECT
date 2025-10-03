@@ -3,100 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BMW Experience</title>
+  <title>BMW Experience – 50 Jahre Edition</title>
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #c49e6c;
+      --bmw-blue: #007aff;
       --black: #1a1a1a;
-      --dark: #2e2e2e;
+      --gray: #2e2e2e;
       --light: #f5f5f5;
+      --white: #ffffff;
     }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--black);
-      color: var(--light);
+      color: var(--white);
     }
-    header, footer {
-      background-color: var(--dark);
-      color: var(--gold);
-      text-align: center;
+    header {
+      background-color: var(--black);
       padding: 20px;
+      text-align: center;
     }
     nav a {
-      color: var(--gold);
+      color: var(--white);
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
     nav a:hover {
-      color: var(--light);
+      color: var(--bmw-blue);
     }
-    #hero {
+    .hero {
       position: relative;
-      height: 500px;
-      overflow: hidden;
-    }
-    #hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(60%);
-    }
-    #hero .overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      height: 100vh;
+      background: url('https://images.pexels.com/photos/19094355/pexels-photo-19094355.jpeg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      width: 90%;
-      max-width: 600px;
     }
-    #hero h2 {
-      color: var(--gold);
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 700px;
+    }
+    .overlay h1 {
       font-size: 2.5em;
       margin-bottom: 20px;
+      color: var(--white);
     }
-    #hero input {
-      width: 100%;
+    .overlay button {
+      background-color: var(--bmw-blue);
+      color: var(--white);
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .overlay button:hover {
+      background-color: #339cff;
+    }
+    .search-section {
+      background-color: var(--gray);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .search-section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+    .search-section input {
+      width: 80%;
+      max-width: 500px;
       padding: 14px;
       border-radius: 8px;
       border: none;
-      background-color: var(--dark);
-      color: var(--light);
+      background-color: #3a3a3a;
+      color: var(--white);
       font-size: 1em;
     }
-    #hero button {
+    .search-section button {
       margin-top: 10px;
       padding: 12px 24px;
-      background-color: var(--gold);
-      color: var(--black);
+      background-color: var(--bmw-blue);
+      color: var(--white);
       border: none;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
     }
-    #hero button:hover {
-      background-color: #d8b47f;
-    }
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    h1, h2 {
-      color: var(--gold);
+    .search-section button:hover {
+      background-color: #339cff;
     }
     #searchResult {
       margin-top: 15px;
       color: var(--light);
+    }
+    footer {
+      background-color: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>BMW Experience</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -104,24 +122,22 @@
     </nav>
   </header>
 
-  <section id="hero">
-    <img src="https://images.pexels.com/photos/19094355/pexels-photo-19094355.jpeg" alt="BMW Hero">
+  <section class="hero">
     <div class="overlay">
-      <h2>Find Your Ultimate BMW</h2>
-      <input type="text" id="carSearch" placeholder="Search BMW models...">
-      <button onclick="searchBMW()">Search</button>
-      <p id="searchResult"></p>
+      <h1>50 YEARS OF COMFORTING THRILL SEEKERS.</h1>
+      <button onclick="alert('Explore the BMW M 50 Jahre Edition')">Discover now</button>
     </div>
   </section>
 
-  <section id="intro">
-    <h2>Welcome to BMW Experience</h2>
-    <p>BMW Experience is more than a brand—it’s a lifestyle. Discover the thrill of driving through precision engineering and timeless design.</p>
-    <p>Explore exclusive access to BMW’s latest models, personalized test drives, and premium ownership services.</p>
+  <section class="search-section">
+    <h2>Find your BMW</h2>
+    <input type="text" id="carSearch" placeholder="Search BMW models...">
+    <button onclick="searchBMW()">Find a new car</button>
+    <p id="searchResult"></p>
   </section>
 
   <footer>
-    © 2025 BMW Experience. All Rights Reserved.
+    &copy; 2025 BMW Experience. Celebrating 50 years of driving excellence.
   </footer>
 
   <script>
