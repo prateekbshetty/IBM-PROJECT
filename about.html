@@ -40,13 +40,20 @@
     h1, h2 {
       color: var(--gold);
     }
-    textarea, input[type="text"] {
+    .card {
+      background-color: var(--dark);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      max-width: 700px;
+      margin: 40px auto;
+    }
+    textarea {
       width: 100%;
-      max-width: 600px;
       padding: 15px;
       border-radius: 8px;
       border: none;
-      background-color: var(--dark);
+      background-color: #3a3a3a;
       color: var(--light);
       resize: none;
       margin-bottom: 20px;
@@ -59,10 +66,13 @@
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
     }
     button:hover {
       background-color: #d8b47f;
+    }
+    #sentimentResult {
+      margin-top: 15px;
+      color: var(--light);
     }
   </style>
 </head>
@@ -78,20 +88,21 @@
   </header>
 
   <section>
-    <h2>Our Vision</h2>
-    <p>BMW Experience is a fusion of luxury, technology, and emotion. We believe in delivering not just vehicles, but unforgettable journeys powered by innovation and AI.</p>
+    <h2>Driven by Intelligence</h2>
+    <p>BMW Experience blends luxury with cutting-edge AI to deliver personalized journeys, smarter service, and unforgettable moments.</p>
   </section>
 
-  <section id="sentiment">
+  <section class="card">
     <h2>🧠 Sentiment Analysis</h2>
-    <p>Analyze customer feedback in real time using AI. Classify emotions as positive, negative, or neutral to improve services.</p>
+    <p>Understand customer emotions in real time. Type feedback below and let AI classify it.</p>
     <textarea id="sentimentInput" placeholder="Type feedback here..."></textarea>
     <button onclick="analyzeSentiment()">Analyze Sentiment</button>
     <p id="sentimentResult"></p>
   </section>
 
-  <section id="tts">
+  <section class="card">
     <h2>🎙️ Text-to-Speech</h2>
+    <p>Let your words come to life. Type a message and hear it spoken aloud.</p>
     <textarea id="textInput" placeholder="Type something inspiring..."></textarea>
     <button id="speakBtn">🔊 Speak</button>
   </section>
@@ -104,8 +115,8 @@
   <script>
     function analyzeSentiment() {
       const text = document.getElementById("sentimentInput").value.toLowerCase();
-      const positiveWords = /\b(good|excellent|love)\b/;
-      const negativeWords = /\b(bad|poor|hate)\b/;
+      const positiveWords = /\b(good|excellent|love|amazing|great)\b/;
+      const negativeWords = /\b(bad|poor|hate|terrible|worst)\b/;
       let result = "Neutral 🙂";
       if (positiveWords.test(text)) result = "Positive 😃";
       else if (negativeWords.test(text)) result = "Negative 😞";
