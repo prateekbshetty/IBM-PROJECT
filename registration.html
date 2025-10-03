@@ -41,6 +41,8 @@
     h2 {
       text-align: center;
       color: var(--gold);
+      font-size: 2em;
+      margin-bottom: 30px;
     }
     form {
       background-color: var(--dark);
@@ -60,8 +62,9 @@
       border: none;
       border-radius: 6px;
       margin-bottom: 20px;
-      background-color: #4f4f4f;
+      background-color: #3a3a3a;
       color: var(--light);
+      font-size: 1em;
     }
     input::placeholder {
       color: #ccc;
@@ -76,6 +79,7 @@
       font-weight: bold;
       font-size: 1.1em;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     button:hover {
       background-color: #d8b47f;
@@ -103,7 +107,8 @@
       <input type="email" id="email" name="email" placeholder="prateek@example.com" required>
 
       <label for="model">Preferred BMW Model</label>
-      <select id="model" name="model">
+      <select id="model" name="model" required>
+        <option value="">-- Select a Model --</option>
         <option value="3-series">BMW 3 Series</option>
         <option value="5-series">BMW 5 Series</option>
         <option value="x5">BMW X5</option>
